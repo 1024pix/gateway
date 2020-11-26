@@ -1,13 +1,14 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const packageJSON = require('../package.json');
 const serverPort = process.env.PORT || 3000;
 
 const init = async () => {
 
     const server = createServer(serverPort);
-
-    addCertificationsRoute(server);
+    healthCheckRoute(server);
+    certificationsRoute(server);
 
     await server.start();
     console.log('Server running on %s', server.info.uri);
@@ -25,7 +26,7 @@ function createServer(port) {
   });
 }
 
-function addCertificationsRoute(server) {
+function certificationsRoute(server) {
   server.route({
     method: 'GET',
     path: '/v1/certifications/organisation/{uai}',
@@ -37,6 +38,29 @@ function addCertificationsRoute(server) {
         return h.response(notFoundError()).code(404)
       }
     }
+  })
+}
+  
+
+
+function healthCheckRoute(server) {
+  server.route({
+    method: 'GET',
+    path: '/v1',
+    config: {
+      auth: false,
+      handler: () => {
+        return {
+          'name': packageJSON.name,
+          'version': packageJSON.version,
+          'description': packageJSON.description,
+          'environment': process.env.environment,
+          'container-version': process.env.CONTAINER_VERSION,
+          'container-app-name': process.env.APP,
+        };
+      },
+      tags: ['v1, healthcheck'],
+    },
   });
 }
 
@@ -53,6 +77,6 @@ function notFoundError(){
 }
 
 function exitOnError(err){
-  logger.error(err);
+  console.error(err);
   process.exit(1);
 }
