@@ -1,0 +1,58 @@
+'use strict';
+
+const Hapi = require('@hapi/hapi');
+const serverPort = process.env.PORT || 3000;
+
+const init = async () => {
+
+    const server = createServer(serverPort);
+
+    addCertificationsRoute(server);
+
+    await server.start();
+    console.log('Server running on %s', server.info.uri);
+};
+
+process.on('unhandledRejection', exitOnError);
+
+
+init();
+
+
+function createServer(port) {
+  return Hapi.server({
+    port,
+  });
+}
+
+function addCertificationsRoute(server) {
+  server.route({
+    method: 'GET',
+    path: '/v1/certifications/organisation/{uai}',
+    handler: (request, h) => {
+      if('1234567A' === request.params.uai){
+        const certifications = require('../lib/certifications.json')
+        return certifications;
+      } else {
+        return h.response(notFoundError()).code(404)
+      }
+    }
+  });
+}
+
+function notFoundError(){
+  return {
+    "errors": [
+      {
+        "status": "404",
+        "title": "Ressource not found",
+        "detail": "L'organisation pour le code UAI demandée n'existe pas."
+      }
+    ]
+  }
+}
+
+function exitOnError(err){
+  logger.error(err);
+  process.exit(1);
+}
