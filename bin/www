@@ -1,15 +1,19 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const HapiSwagger = require('hapi-swagger');
 const packageJSON = require('../package.json');
 const serverPort = process.env.PORT || 3000;
+const Inert = require('@hapi/inert');
+const Joi = require('joi');
+const Vision = require('@hapi/vision');
 
 const init = async () => {
 
     const server = createServer(serverPort);
     healthCheckRoute(server);
     certificationsRoute(server);
-
+    await registerPlugins(server);
     await server.start();
     console.log('Server running on %s', server.info.uri);
 };
@@ -19,6 +23,25 @@ process.on('unhandledRejection', exitOnError);
 
 init();
 
+
+async function registerPlugins(server) {
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: {
+        basePath: '/v1',
+        grouping: 'tags',
+        info: {
+          'title': 'Welcome to the Pix api gateway',
+          'version': packageJSON.version,
+        },
+        documentationPath: '/v1/documentation',
+      },
+    },
+  ]);
+}
 
 function createServer(port) {
   return Hapi.server({
@@ -30,28 +53,40 @@ function certificationsRoute(server) {
   server.route({
     method: 'GET',
     path: '/v1/certifications/organisation/{uai}',
-    handler: (request, h) => {
-      const uai = request.params.uai;
-      try {
-        const data = require(`../lib/certifications_${uai}.json`)
-        return data;
-      }
-      catch(err){
-        console.error(err);
-        return h.response(notFoundError()).code(404)
-      }
+    config: {
+      handler: (request, h) => {
+        const uai = request.params.uai;
+        try {
+          const data = require(`../lib/certifications_${uai}.json`)
+          return data;
+        }
+        catch(err){
+          console.error(`/v1/certifications/organisation/{$uai}`, err);
+          return h.response(notFoundError()).code(404)
+        }
+      },
+      validate: {
+        params: Joi.object({
+            uai: Joi.string()
+                .required()
+                .description('L\'identifiant (UAI) de l\'établissement'),
+        })
+      },    
+      tags: ['api', 'v1', 'certifications'],
+      notes: [
+        '- **Cette route permet d\'acceder aux certifications pour une organisation**\n' +
+        '- Récupère la réponse pour toutes les certifications enregistrées pour l\'organisation dont l\'UAI est donnée en paramètre.',
+      ],
     }
   })
 }
   
-
 
 function healthCheckRoute(server) {
   server.route({
     method: 'GET',
     path: '/v1',
     config: {
-      auth: false,
       handler: () => {
         return {
           'name': packageJSON.name,
@@ -61,8 +96,11 @@ function healthCheckRoute(server) {
           'container-version': process.env.CONTAINER_VERSION,
           'container-app-name': process.env.APP,
         };
-      },
-      tags: ['v1, healthcheck'],
+      },  
+      tags: ['api', 'v1', 'healthcheck'],
+      notes: [
+        '- **Cette route permet de vérifier le statut de l\'API**'
+      ],
     },
   });
 }
@@ -83,3 +121,5 @@ function exitOnError(err){
   console.error(err);
   process.exit(1);
 }
+
+
