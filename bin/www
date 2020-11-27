@@ -31,10 +31,13 @@ function certificationsRoute(server) {
     method: 'GET',
     path: '/v1/certifications/organisation/{uai}',
     handler: (request, h) => {
-      if('1234567A' === request.params.uai){
-        const certifications = require('../lib/certifications.json')
-        return certifications;
-      } else {
+      const uai = request.params.uai;
+      try {
+        const data = require(`../lib/certifications_${uai}.json`)
+        return data;
+      }
+      catch(err){
+        console.error(err);
         return h.response(notFoundError()).code(404)
       }
     }

@@ -1,0 +1,88 @@
+{
+  "links": {
+    "self": "https://gateway.pix.fr/v1/certifications/organisation/1234567X"
+  },
+  "data": [],
+  "included": [
+    {
+      "type": "areas",
+      "id": "ID_AREA_1",
+      "attributes": {
+        "code": "1",
+        "title": "Informations et données"
+      }
+    },
+    {
+      "type": "areas",
+      "id": "ID_AREA_2",
+      "attributes": {
+        "code": "2",
+        "title": "Communication et collaboration"
+      }
+    },
+    {
+      "type": "competences",
+      "id": "ID_COMP_11",
+      "attributes": {
+        "index": "1.1",
+        "name": "Mener une recherche et une veille d’information"
+      },
+      "relationships": {
+        "area": {
+          "data": {
+            "type": "areas",
+            "id": "ID_AREA_1"
+          }
+        }
+      }
+    },
+    {
+      "type": "competences",
+      "id": "ID_COMP_12",
+      "attributes": {
+        "index": "1.2",
+        "name": "Gérer des données"
+      },
+      "relationships": {
+        "area": {
+          "data": {
+            "type": "areas",
+            "id": "ID_AREA_1"
+          }
+        }
+      }
+    },
+    {
+      "type": "competences",
+      "id": "ID_COMP_21",
+      "attributes": {
+        "index": "2.1",
+        "name": "Interagir"
+      },
+      "relationships": {
+        "area": {
+          "data": {
+            "type": "areas",
+            "id": "ID_AREA_2"
+          }
+        }
+      }
+    },
+    {
+      "type": "competences",
+      "id": "ID_COMP_22",
+      "attributes": {
+        "index": "2.2",
+        "name": "Partager et publier"
+      },
+      "relationships": {
+        "area": {
+          "data": {
+            "type": "areas",
+            "id": "ID_AREA_2"
+          }
+        }
+      }
+    }
+  ]
+}
