@@ -13,33 +13,29 @@
         "last-name": "Success",
         "birthdate": "2000-01-01",
         "national-student-id": "INE_ID",
-        "statut": "validated",
+        "status": "validated",
         "pix-score": 518,
         "verification-code": "P-Y9484CWQ",
         "date": "2020-12-31T12:00:38.133Z",
-        "delivered-at": "2020-06-05T23:25:38.133Z"
-      },
-      "relationships": {
-        "competence-levels": {
-          "data": [
-            {
-              "type": "competence-levels",
-              "id": "900001"
-            },
-            {
-              "type": "competence-levels",
-              "id": "900002"
-            },
-            {
-              "type": "competence-levels",
-              "id": "900003"
-            },
-            {
-              "type": "competence-levels",
-              "id": "900004"
-            }
-          ]
-        }
+        "delivered-at": "2020-06-05T23:25:38.133Z",
+        "competence-results": [
+          {
+            "competence-id": "ID_COMP_11",
+            "level": "4"
+          },
+          {
+            "competence-id": "ID_COMP_12",
+            "level": "5"
+          },
+          {
+            "competence-id": "ID_COMP_21",
+            "level": "5"
+          },
+          {
+            "competence-id": "ID_COMP_22",
+            "level": "3"
+          }
+        ]
       }
     }
   ],
@@ -120,66 +116,6 @@
           "data": {
             "type": "areas",
             "id": "ID_AREA_2"
-          }
-        }
-      }
-    },
-    {
-      "type": "competence-levels",
-      "id": "900001",
-      "attributes": {
-        "level": 4
-      },
-      "relationships": {
-        "competence": {
-          "data": {
-            "type": "competences",
-            "id": "ID_COMP_11"
-          }
-        }
-      }
-    },
-    {
-      "type": "competence-levels",
-      "id": "900002",
-      "attributes": {
-        "level": 5
-      },
-      "relationships": {
-        "competence": {
-          "data": {
-            "type": "competences",
-            "id": "ID_COMP_12"
-          }
-        }
-      }
-    },
-    {
-      "type": "competence-levels",
-      "id": "900003",
-      "attributes": {
-        "level": 5
-      },
-      "relationships": {
-        "competence": {
-          "data": {
-            "type": "competences",
-            "id": "ID_COMP_21"
-          }
-        }
-      }
-    },
-    {
-      "type": "competence-levels",
-      "id": "900004",
-      "attributes": {
-        "level": 3
-      },
-      "relationships": {
-        "competence": {
-          "data": {
-            "type": "competences",
-            "id": "ID_COMP_22"
           }
         }
       }
