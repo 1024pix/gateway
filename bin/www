@@ -52,7 +52,7 @@ function createServer(port) {
 function certificationsRoute(server) {
   server.route({
     method: 'GET',
-    path: '/v1/certifications/organisation/{uai}',
+    path: '/v1/organisations/{uai}/certifications',
     config: {
       handler: (request, h) => {
         const uai = request.params.uai;

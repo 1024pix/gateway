@@ -1,6 +1,6 @@
 {
   "links": {
-    "self": "https://gateway.pix.fr/v1/certifications/organisation/1234567X"
+    "self": "https://gateway.pix.fr/v1/organisations/1234567A/certifications"
   },
   "data": [],
   "included": [
