@@ -85,7 +85,7 @@ function certificationsRoute(server) {
 function healthCheckRoute(server) {
   server.route({
     method: 'GET',
-    path: '/v1',
+    path: '/v1/',
     config: {
       handler: () => {
         return {
