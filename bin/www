@@ -33,6 +33,7 @@ async function registerPlugins(server) {
       options: {
         basePath: '/v1',
         grouping: 'tags',
+        cors: true,
         info: {
           'title': 'Welcome to the Pix api gateway',
           'version': packageJSON.version,
