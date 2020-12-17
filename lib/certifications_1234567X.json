@@ -2,7 +2,41 @@
   "links": {
     "self": "https://gateway.pix.fr/v1/organisations/1234567A/certifications"
   },
-  "data": [],
+  "data": {
+    "attributes": {
+      "certifications": []
+    },
+    "relationships": {
+      "competences": {
+        "data": [
+          {
+            "type": "competences",
+            "id": "ID_COMP_11"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_12"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_21"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_22"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_31"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_32"
+          }
+        ]
+      }
+    }
+  },
   "included": [
     {
       "type": "areas",

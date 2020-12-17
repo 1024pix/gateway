@@ -2,43 +2,78 @@
   "links": {
     "self": "https://gateway.pix.fr/v1/organisations/1234567A/certifications"
   },
-  "data": [
-    {
-      "type": "certifications",
-      "id": "200",
-      "attributes": {
-        "first-name": "Anne",
-        "middle-name": "Jerry",
-        "third-name": "Bobby",
-        "last-name": "Success",
-        "birthdate": "2000-01-01",
-        "national-student-id": "INE_ID",
-        "status": "validated",
-        "pix-score": 518,
-        "verification-code": "P-Y9484CWQ",
-        "date": "2020-12-31T12:00:38.133Z",
-        "delivered-at": "2020-06-05T23:25:38.133Z",
-        "competence-results": [
+  "data": {
+    "attributes": {
+      "certifications": [
+        {
+          "type": "certifications",
+          "id": "200",
+          "attributes": {
+            "first-name": "Anne",
+            "middle-name": "Jerry",
+            "third-name": "Bobby",
+            "last-name": "Success",
+            "birthdate": "2000-01-01",
+            "national-student-id": "INE_ID",
+            "status": "validated",
+            "pix-score": 518,
+            "verification-code": "P-Y9484CWQ",
+            "date": "2020-12-31T12:00:38.133Z",
+            "delivered-at": "2020-06-05T23:25:38.133Z",
+            "certification-center": "Collège Kurt Cobain",
+            "competence-results": [
+              {
+                "competence-id": "ID_COMP_11",
+                "level": "4"
+              },
+              {
+                "competence-id": "ID_COMP_12",
+                "level": "5"
+              },
+              {
+                "competence-id": "ID_COMP_21",
+                "level": "5"
+              },
+              {
+                "competence-id": "ID_COMP_22",
+                "level": "3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "relationships": {
+      "competences": {
+        "data": [
           {
-            "competence-id": "ID_COMP_11",
-            "level": "4"
+            "type": "competences",
+            "id": "ID_COMP_11"
           },
           {
-            "competence-id": "ID_COMP_12",
-            "level": "5"
+            "type": "competences",
+            "id": "ID_COMP_12"
           },
           {
-            "competence-id": "ID_COMP_21",
-            "level": "5"
+            "type": "competences",
+            "id": "ID_COMP_21"
           },
           {
-            "competence-id": "ID_COMP_22",
-            "level": "3"
+            "type": "competences",
+            "id": "ID_COMP_22"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_31"
+          },
+          {
+            "type": "competences",
+            "id": "ID_COMP_32"
           }
         ]
       }
     }
-  ],
+  },
   "included": [
     {
       "type": "areas",
