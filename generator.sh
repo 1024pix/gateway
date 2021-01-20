@@ -8,7 +8,7 @@ sleep 20
 GEN_IP=$(docker inspect --format '{{.NetworkSettings.IPAddress}}'  ${CID})
 echo "IP of running container ${GEN_IP} (${CID})"
 # Execute an HTTP request to generate a Ruby client
-CURL_RESPONSE=$(curl -X POST --header 'Content-Type: application/json' --silent --header 'Accept: application/json' -d '{"openAPIUrl": "https://gateway.pix.fr/swagger.json"}' 'http://localhost:8888/api/gen/clients/java')
+CURL_RESPONSE=$(curl -X POST --header 'Content-Type: application/json' --silent --header 'Accept: application/json' -d '{"openAPIUrl": "https://api-pr2358.review.pix.fr/livret-scolaire/swagger.json"}' 'http://localhost:8888/api/gen/clients/java')
 echo "Curl response: ${CURL_RESPONSE}"
 ZIP_FILE=$(echo ${CURL_RESPONSE} | sed -E 's/.*"code":"?([^,"]*)"?.*/\1/')
 
